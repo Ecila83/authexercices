@@ -44,4 +44,10 @@ class SecurityController extends AbstractController
         'username' => $username
        ]);
     }
+
+    #[Route('/logout', name: 'logout')]
+    public function logout()
+    {  
+
+    }
 }
