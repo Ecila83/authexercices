@@ -38,6 +38,10 @@ class SecurityController extends AbstractController
         $error = $authenticationUtils->getLastAuthenticationError();
         $username = $authenticationUtils->getLastUsername();
 
+        // // recurper le nom de la clef erreur 
+        // if ($error){
+        //     dd($error->getMessageKey());
+        // }
 
        return $this->render('security/connexion.html.twig', [
         'error' => $error,
