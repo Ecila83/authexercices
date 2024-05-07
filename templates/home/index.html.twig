@@ -3,7 +3,7 @@
 {% block title %}Hello!{% endblock %}
 
 {% block body %}
-    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
         Bonjour
         {{app.user.name}}
     {% else %}
