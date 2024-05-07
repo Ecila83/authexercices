@@ -15,9 +15,14 @@
         <header style="display:flex;flex-direction: row; justify-content: space-between; align-items:center; background: #aa1923;">
             <span>Ma super app</span>
             <ul>
-                <a href="{{path('inscription')}}">Inscription</a>
-                <a href="{{path('connexion')}}">Connexion</a>
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                 <a href="{{path('logout')}}">Deconnexion</a>
+            {% else %}
+                <a href="{{path('connexion')}}">Connexion</a>
+                <a href="{{path('inscription')}}">Inscription</a>
+
+            {% endif %}
+
             </ul>
         </header>
         {% block body %}{% endblock %}
