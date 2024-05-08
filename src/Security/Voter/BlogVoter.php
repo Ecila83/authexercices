@@ -9,18 +9,20 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class BlogVoter extends Voter
 {
     public const EDIT = 'BLOG_EDIT';
-    public const VIEW = 'POST_VIEW';
 
-    protected function supports(string $attribute, mixed $subject): bool
+
+    protected function supports(string $attribute, $subject): bool
     {
+      
         // replace with your own logic
         // https://symfony.com/doc/current/security/voters.html
-        return in_array($attribute, [self::EDIT, self::VIEW])
+        return in_array($attribute, [self::EDIT])
             && $subject instanceof \App\Entity\Blog;
     }
 
     protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool
     {
+        dump($token);
         $user = $token->getUser();
 
         // if the user is anonymous, do not grant access
@@ -31,14 +33,12 @@ class BlogVoter extends Voter
         // ... (check conditions and return true to grant permission) ...
         switch ($attribute) {
             case self::EDIT:
-                // logic to determine if the user can EDIT
-                // return true or false
+                if($subject->getAuthor() === $user){
+                    return true;
+                }
                 break;
 
-            case self::VIEW:
-                // logic to determine if the user can VIEW
-                // return true or false
-                break;
+
         }
 
         return false;

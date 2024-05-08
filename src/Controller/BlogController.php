@@ -24,7 +24,7 @@ class BlogController extends AbstractController
     #[IsGranted("ROLE_USER")]
     public function edit(Blog $blog): Response
     {
-        $this->denyAccessUnlessGranted('BLOG_EDIT');
+        $this->denyAccessUnlessGranted('BLOG_EDIT', $blog);
 
         $user = $this->getUser();
 
