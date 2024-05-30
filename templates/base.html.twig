@@ -26,5 +26,9 @@
             </ul>
         </header>
         {% block body %}{% endblock %}
+    {% for flash in app.flashes('success') %}
+        <h3>{{flash}}</h3>
+        
+    {% endfor %}    
     </body>
 </html>
