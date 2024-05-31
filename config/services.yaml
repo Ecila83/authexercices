@@ -21,7 +21,7 @@ services:
             - '../src/Kernel.php'
 
     # Explicit configuration for LoginListener
-    App\EventListener\loginListener:
+    App\EventListener\LoginListener:
         tags:
-            - { name: 'kernel.event_listener', event: 'LoginSuccessEvent', method: 'loginFlash' }
+            - { name: 'kernel.event_listener', event: 'Symfony\Component\Security\Http\Event\LoginSuccessEvent', method: 'loginFlash' }
 
