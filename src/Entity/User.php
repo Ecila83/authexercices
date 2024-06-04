@@ -4,10 +4,12 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Persistence\Event\LifecycleEventArgs;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
+#[ORM\HasLifecycleCallbacks()]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -119,5 +121,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->name = $name;
 
         return $this;
+    }
+
+    #[ORM\PrePersist()]
+    public function doSomething(LifecycleEventArgs $args){
+        /** @var \App\Entity\User $user */
+        $user = $args->getObject();
+        $user->setEmail('helo@gmail.com');
+
+    }
+
+    #[ORM\PostPersist()]
+    public function doSomething2(LifecycleEventArgs $args){
+        dd($args);
+
     }
 }
