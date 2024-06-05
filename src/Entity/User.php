@@ -123,17 +123,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    #[ORM\PrePersist()]
-    public function doSomething(LifecycleEventArgs $args){
-        /** @var \App\Entity\User $user */
-        $user = $args->getObject();
-        $user->setEmail('helo@gmail.com');
+    // #[ORM\PrePersist()]
+    // public function doSomething(LifecycleEventArgs $args){
+    //     /** @var \App\Entity\User $user */
+    //     $user = $args->getObject();
+    //     $user->setEmail('helo@gmail.com');
 
-    }
+    // }
 
-    #[ORM\PostPersist()]
-    public function doSomething2(LifecycleEventArgs $args){
-        dd($args);
+    // #[ORM\PostPersist()]
+    // public function doSomething2(LifecycleEventArgs $args){
+    //     dd($args);
 
-    }
+    // }
 }
