@@ -20,15 +20,16 @@ class SecurityController extends AbstractController
     public function inscription(EntityManagerInterface $em, Request $request, UserPasswordHasherInterface $password, EventDispatcherInterface $eventDispatcher): Response
     {
         $user = new User();
+        $user->setName('pierre');
         $userForm = $this->createForm(UserType::class, $user);
         $userForm->handleRequest($request);
 
         if ($userForm->isSubmitted() && $userForm->isValid()) {
-            $user->setPassword($password->hashPassword($user, $user->getPassword()));
-            $em->persist($user);
-            $em->flush();
-            $eventDispatcher->dispatch(new NewUserEvent($user->getEmail()));
-            return $this->redirectToRoute('home');
+            // $user->setPassword($password->hashPassword($user, $user->getPassword()));
+            // $em->persist($user);
+            // $em->flush();
+            // $eventDispatcher->dispatch(new NewUserEvent($user->getEmail()));
+            // return $this->redirectToRoute('home');
         }
 
         return $this->render('security/inscription.html.twig', [

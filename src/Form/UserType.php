@@ -3,9 +3,11 @@
 namespace App\Form;
 
 use App\Entity\User;
+use App\EventSubscriber\UserFormSubscriber;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+
 
 class UserType extends AbstractType
 {
@@ -15,8 +17,8 @@ class UserType extends AbstractType
             ->add('name')
             ->add('email')
             ->add('password')
-            
-        ;
+            ->addEventSubscriber(new UserFormSubscriber());
+
     }
 
     public function configureOptions(OptionsResolver $resolver): void
